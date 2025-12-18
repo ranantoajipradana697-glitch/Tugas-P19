@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Mahasiswa & Usia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            /* Border ungu muda seperti di gambar */
+            border: 1px solid #e6e6fa; 
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #6a0dad; /* Warna ungu untuk judul */
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 12px 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: #6a0dad; /* Warna ungu untuk tombol */
+            color: white;
+            padding: 10px 25px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #550a8a;
+        }
+        #output {
+            margin-top: 25px;
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #6a0dad; /* Warna ungu untuk hasil */
+            font-weight: bold;
+        }
+        #output span {
+            font-weight: normal;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Data Mahasiswa & Usia</h2>
+
+        <input type="text" id="inputNama" placeholder="Nama">
+        <input type="text" id="inputNIM" placeholder="NIM">
+        <input type="text" id="inputTahunLahir" placeholder="Tahun Lahir">
+
+        <button id="btnTampilkan">Tampilkan</button>
+
+        <div id="output">
+            </div>
+    </div>
+
+    <script>
+        // Mendefinisikan function untuk menampilkan data dan menghitung usia
+        // Fungsi ini akan mengambil data dari elemen input dan menampilkan hasilnya
+        function tampilkanDataMahasiswa() {
+            // 1. Ambil nilai dari input fields
+            const nama = document.getElementById("inputNama").value;
+            const nim = document.getElementById("inputNIM").value;
+            const tahunLahirInput = document.getElementById("inputTahunLahir").value;
+
+            const tahunSekarang = 2025; // Asumsi tahun saat ini (untuk menghitung usia)
+            const tahunLahirAngka = parseInt(tahunLahirInput);
+            let usia = "Tahun Lahir Tidak Valid";
+
+            // 2. Perhitungan usia
+            if (!isNaN(tahunLahirAngka) && tahunLahirAngka > 1900 && tahunLahirAngka < tahunSekarang + 1) {
+                const hasilUsia = tahunSekarang - tahunLahirAngka;
+                usia = hasilUsia + " tahun";
+            } else {
+                usia = "Tahun Lahir Tidak Valid";
+            }
+            
+            // 3. Membangun string output
+            const outputString = `
+                Nama : <span>${nama}</span><br>
+                NIM : <span>${nim}</span><br>
+                Usia : <span>${usia}</span>
+            `;
+
+            // 4. Menampilkan hasil di elemen output
+            document.getElementById("output").innerHTML = outputString;
+        }
+
+        // Menambahkan event listener ke tombol "Tampilkan"
+        document.getElementById("btnTampilkan").addEventListener("click", tampilkanDataMahasiswa);
+        
+        // Panggil fungsi saat halaman pertama kali dimuat (jika Anda ingin langsung menampilkan hasil default)
+        // tampilkanDataMahasiswa(); 
+    </script>
+
+</body>
+</html>
